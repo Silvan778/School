@@ -14,20 +14,33 @@ Icm = (1/12) * mp * (d**2 + l**2)
 I = Icm + mp * (l/2)**2
 
 # berekende waarden 2
-a = I + mp * l**2
-b = (mp*l**2) / 2
-c = Icm + (1/4) * mp * l**2
+a = (3/2) * mp * g * l
+b = I + mp * l**2
+c = (mp*l**2) / 2
+d = Icm + (1/4) * mp * l**2
 
-# berekende waarden van A en B matrix
-A = np.array([[0, 0, 1, 0],
-             [0, 0, 0, 1],
-             [20.99, -20.97, 0, 0],
-             [-28.03, 76.88, 0, 0]])
+# Matrix M1, M2, M3 berekenen
+M1 = np.array([[1, 0, 0, 0],
+              [0,b+c, 0, c],
+              [0,0,1,0],
+              [0,c+d,0,d]
+])
 
-B = np.array([[0],
-             [0],
-             [28.32],
-             [-70.89]])
+M2 = np.array([[0, 1, 0, 0],
+              [-a, 0, 0, 0],
+              [0,0,0,1],
+              [-c,0,-c,0]
+])
+
+M3 = np.array([[0],
+              [1],
+              [0],
+              [0]
+])
+
+# Matrix A en B berekenen
+A = np.linalg.inv(M1) @ M2
+B = np.linalg.inv(M1) @ M3
 
 # gain matrix bepalen met polen
 Polen = np.array([-0.5,-10,-11,-100]) # zelf gekozen polen / eigenwaarde

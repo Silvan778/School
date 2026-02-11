@@ -84,7 +84,7 @@ def main():
   control = pp_controller()
   simulation = util.simulation(model=model,timestep=timestep)
   simulation.setCost()
-  simulation.max_duration = 2 #seconde
+  simulation.max_duration = 10 #seconde
   simulation.GIF_toggle = False #set to false to avoid frame and GIF creation
 
   while simulation.vis.Run():
